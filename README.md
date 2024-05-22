@@ -22,7 +22,7 @@ NoSQL databases stores data inside a single structure, rather than within multip
   * NoSQL databases usually do not support complex queries with multiple joins due to how they are designed, which eliminates some of their capacity in real-life scenarios.
 
 ## MongoDB Introduction
-
+![mongodb_logo](images/MongoDB_Logo.svg.png)
 ### MongoDB is a popular document-based NoSQL database which stores its data in JSON-like structures.
 
 Rather than the traditional table-based rows and columns, the MongoDB allows for flexibility and scalability through its single curly-bracketed data entities.
@@ -34,5 +34,19 @@ Rather than the traditional table-based rows and columns, the MongoDB allows for
 ### The architecture works by adding more servers to a cluster to support larger volumes of data. The data is scaled out through 'sharding' across these servers, which increase performance.
 **Replica Sets**: A large part of MongoDB functionality occurs through its Replica Sets, where the data is maintained across multiple servers, so that in case of a server failure, the documents are highly available through other servers picking up where they left off. <br><br>
 **Sharding**: MongoDB introduces shards, where documents can be distributed to along with a shard key to itemize each instantiation. This balances the load across the cluster.
-
+<br> ![shard_collections](images/shards.png)
 ## Advantages and Disadvantages of MongoDB
+### Advantages:
+* **Flexibility**: MongoDB does not require a schema (a predefined set of rules to manage data entry), so data can be changed around without any periods of maintenance.
+* **Scalability**: MongoDB can handle large volumes of data through the aforementioned Replica Sets and Sharding methods.
+* **High Availability and Performance**: MongoDB supports some complex queries like aggregation due to its language. It is also optimised for querying and inserting data.
+
+### Disadvantages:
+* **Memory**: MongoDB stores data in a document-based format, so this can be quite intense for RAM when manipulating data. The MongoDB JSON-like format for storing data (BSON) also requires a fair bit more storage than JSON.
+* **Complexity**: MongoDB can be fairly tough to manage, especially when multiple shards have been instantiated to support large data operations.
+
+### MongoDB is useful for integrating large volumes of data from diverse sources. It is especially useful for operations across big data due to its high availability and scaling abilities.
+The flexible schema supports integration of most formats of data. The scalability also enables real-time data analysis of big data.
+
+### MongoDB is less useful when identifying relations between collections. Data held there is not consistent and lacks integrity, so it is not suitable for advanced analytics.
+Due to the way MongoDB shares data operations across multiple machines, data versions sometimes lag behind others. MongoDB doesn't follow data storage principles like Relational Databases do (e.g. ACID) so duplicate values, incomplete data, and inaccurate data can be seen.
