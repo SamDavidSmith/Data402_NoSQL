@@ -8,7 +8,7 @@ NoSQL databases stores data inside a single structure, rather than within multip
 <br>
 ### There are differences between SQL and NoSQL around scalability, languages used and the data schema.
 ![differences.png](sql_vs_nosql.jpg)
-</n> We'll go through the main differences.
+<br> We'll go through the main differences.
 
 1. **Type of Database**:<br> Relational (SQL) Databases store structured data in rows and columns. <br>Non-relational (NoSQL) databases store data in various ways, such as key-value pairs, graph stores, and document-based. MongoDB is a very popular document-based server.
 2. **Programming Languages**: <br> Relational Databases use SQL to manipulate data, which is a very powerful language when it comes to forming complex queries.<br> Non-relational databases use different languages to query their data. For example, MongoDB uses a language which has many similarities to JSON script. Cassandra uses its own querying language, CQL.
