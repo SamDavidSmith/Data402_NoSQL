@@ -29,7 +29,8 @@ $and: [
   {eye_color: "blue"},
   {gender: "female"}
   ]
-  })
+  } 
+  {name: 1, eye_color: 1, gender: 1})
 ```
 *   Just like $in, you have $and along with an array, which searches for rows that include all of the values in the array.
 
@@ -40,7 +41,8 @@ $or: [
   {eye_color: "blue"},
   {gender: "female"}
   ]
-  })
+  }, 
+  {name: 1, eye_color: 1, gender: 1})
 ```
 *   $or ensures at least one of the values in the array are met.
 ### Question 9:
@@ -89,3 +91,28 @@ Here, I am finding every entity in the collection with {}, and because the funct
 ```
 * **$nin**: the opposite of $in above: <br>
 `db.characters.find({ mass : {$nin: []}})` finds the documents for which mass is not an empty string.
+
+## Advanced MongoDB exercises:
+
+### Question 1:
+1.
+```mongosh
+db.characters.aggregate( [
+   {$match: { "species.name": "Human" }},
+   {$group: { _id: null, totalHeight: { $sum: "$height" } }}
+] ).pretty()
+```
+2.
+```mongosh
+db.characters.aggregate( [
+   {$group: { _id: "$homeworld.name", totalHeight: { $sum: "$height" } }},
+   {$sort: { _id: 1 }}
+] )
+```
+```mongosh
+db.characters.aggregate( [
+   {$match: { "species.name" : {$nin: [null]}, "mass" : {$nin: [null]}}},
+   {$group: { _id: "$species.name", avgMass: { $avg: "$mass" }, count: { $sum: 1 } }},
+   {$sort: { avgMass: 1 }}
+] )
+```
