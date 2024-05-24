@@ -94,25 +94,73 @@ Here, I am finding every entity in the collection with {}, and because the funct
 
 ## Advanced MongoDB exercises:
 
-### Question 1:
-1.
+### Exercise 1:
+1. Write a query that finds the total (sum) of the height of all human characters in the db
 ```mongosh
 db.characters.aggregate( [
    {$match: { "species.name": "Human" }},
    {$group: { _id: null, totalHeight: { $sum: "$height" } }}
 ] ).pretty()
 ```
-2.
+2.Write a query that finds the max height per homeworld
+
 ```mongosh
 db.characters.aggregate( [
    {$group: { _id: "$homeworld.name", totalHeight: { $sum: "$height" } }},
    {$sort: { _id: 1 }}
 ] )
 ```
+3.Write a query that finds the mass and count per species. Filter out null values and sort by average mass (ascending order)
+
 ```mongosh
 db.characters.aggregate( [
    {$match: { "species.name" : {$nin: [null]}, "mass" : {$nin: [null]}}},
    {$group: { _id: "$species.name", avgMass: { $avg: "$mass" }, count: { $sum: 1 } }},
    {$sort: { avgMass: 1 }}
 ] )
+```
+
+### Exercise 2:
+1.Use .distinct() to find a list of all species names in the database
+
+```mongosh
+db.characters.distinct("species.name")
+```
+2.Use .count() or .countDocuments() to get a count of the amount of humans in the database
+
+```mongosh
+db.characters.countDocuments({"species.name": "Human"})
+```
+3. What does .estimatedDocumentCount({}) do?
+```mongosh
+db.orders.estimatedDocumentCount({})
+```
+This function does not take a filter, but rather counts all the documents in a collection.
+
+### Exercise 3:
+
+* Find Darth Vader's ObjectID:
+```mongosh
+db.characters.find({"name": "Darth Vader"}, {"_id": 1})
+```
+Output: _id: ObjectId('664e15999668b964a0d49f03')
+
+```mongosh
+db.starships.insertOne({
+  name: "Millennium Falcon",
+  model: "Heavily modified YT-1300fp light freighter",
+  manufacturer: "Corellian Engineering Corporation",
+  length: 34.63,
+  max_atmosphering_speed: 1200,
+  crew: 4,
+  passengers: 6,
+  pilot: []
+})
+```
+```mongosh
+db.starships.updateOne(
+    { name: "Millennium Falcon" },
+    { $set: { "pilot": [ObjectId("664e15a9ef9160c68b4b28bd"), ObjectId("664e1596d4f523bd5fc3310f"), ObjectId("664e15a163e4288969721cb6"), ObjectId("664e15b99f9549b28b267797")]} }
+);
+
 ```
